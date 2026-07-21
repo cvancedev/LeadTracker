@@ -19,7 +19,7 @@ function LeadWorkspace({ uid }: LeadWorkspaceProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [editingLead, setEditingLead] = useState<Lead | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
-  const { leads, loading, error } = useLeads(uid, searchTerm);
+  const { leads, totalLeads, loading, error } = useLeads(uid, searchTerm);
 
   const initialValues = editingLead
     ? {
@@ -56,6 +56,11 @@ function LeadWorkspace({ uid }: LeadWorkspaceProps) {
           Sign Out
         </button>
       </header>
+
+      <section className="mb-5 w-full border border-zinc-200 p-4 sm:max-w-48" aria-label="Lead statistics">
+        <p className="text-sm font-medium text-zinc-600">Total Leads</p>
+        <p className="mt-1 text-2xl font-semibold text-zinc-900">{totalLeads}</p>
+      </section>
 
       <LeadForm
         key={editingLead?.id ?? "new-lead"}

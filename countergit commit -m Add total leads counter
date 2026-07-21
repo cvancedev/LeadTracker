@@ -1,0 +1,51 @@
+warning: in the working copy of 'components/LeadTracker.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'hooks/useLeads.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'next-env.d.ts', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/components/LeadTracker.tsx b/components/LeadTracker.tsx[m
+[1mindex 49211e1..193c7fd 100644[m
+[1m--- a/components/LeadTracker.tsx[m
+[1m+++ b/components/LeadTracker.tsx[m
+[36m@@ -19,7 +19,7 @@[m [mfunction LeadWorkspace({ uid }: LeadWorkspaceProps) {[m
+   const [searchTerm, setSearchTerm] = useState("");[m
+   const [editingLead, setEditingLead] = useState<Lead | null>(null);[m
+   const [actionError, setActionError] = useState<string | null>(null);[m
+[31m-  const { leads, loading, error } = useLeads(uid, searchTerm);[m
+[32m+[m[32m  const { leads, totalLeads, loading, error } = useLeads(uid, searchTerm);[m
+ [m
+   const initialValues = editingLead[m
+     ? {[m
+[36m@@ -57,6 +57,11 @@[m [mfunction LeadWorkspace({ uid }: LeadWorkspaceProps) {[m
+         </button>[m
+       </header>[m
+ [m
+[32m+[m[32m      <section className="mb-5 w-full border border-zinc-200 p-4 sm:max-w-48" aria-label="Lead statistics">[m
+[32m+[m[32m        <p className="text-sm font-medium text-zinc-600">Total Leads</p>[m
+[32m+[m[32m        <p className="mt-1 text-2xl font-semibold text-zinc-900">{totalLeads}</p>[m
+[32m+[m[32m      </section>[m
+[32m+[m
+       <LeadForm[m
+         key={editingLead?.id ?? "new-lead"}[m
+         initialValues={initialValues}[m
+[1mdiff --git a/hooks/useLeads.ts b/hooks/useLeads.ts[m
+[1mindex 20874e6..e6e22e1 100644[m
+[1m--- a/hooks/useLeads.ts[m
+[1m+++ b/hooks/useLeads.ts[m
+[36m@@ -37,5 +37,5 @@[m [mexport function useLeads(uid: string, searchTerm: string) {[m
+     );[m
+   }, [leads, searchTerm]);[m
+ [m
+[31m-  return { leads: filteredLeads, loading, error };[m
+[32m+[m[32m  return { leads: filteredLeads, totalLeads: leads.length, loading, error };[m
+ }[m
+[1mdiff --git a/next-env.d.ts b/next-env.d.ts[m
+[1mindex c4b7818..9edff1c 100644[m
+[1m--- a/next-env.d.ts[m
+[1m+++ b/next-env.d.ts[m
+[36m@@ -1,6 +1,6 @@[m
+ /// <reference types="next" />[m
+ /// <reference types="next/image-types/global" />[m
+[31m-import "./.next/dev/types/routes.d.ts";[m
+[32m+[m[32mimport "./.next/types/routes.d.ts";[m
+ [m
+ // NOTE: This file should not be edited[m
+ // see https://nextjs.org/docs/app/api-reference/config/typescript for more information.[m

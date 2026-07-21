@@ -37,5 +37,5 @@ export function useLeads(uid: string, searchTerm: string) {
     );
   }, [leads, searchTerm]);
 
-  return { leads: filteredLeads, loading, error };
+  return { leads: filteredLeads, totalLeads: leads.length, loading, error };
 }
